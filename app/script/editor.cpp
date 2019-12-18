@@ -17,7 +17,7 @@ ScriptEditor::ScriptEditor(Script* script, QWidget* parent)
 {
     //  Propagate script changes back to the node
     auto doc = document();
-    if (0){
+    if (1){//why skip this cause view not updated immediately?
         connect(doc, &QTextDocument::contentsChanged,
                 [=](){ script->setText(doc->toPlainText().toStdString()); });
     }
