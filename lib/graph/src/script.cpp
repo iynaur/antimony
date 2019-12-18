@@ -39,6 +39,7 @@ void Script::update()
     PyObject_SetAttrString(sys_mod, "stderr", string_out);
 
     // Run the script
+    //why run multiple times?
     PyObject* out = PyRun_String(
             script.c_str(), Py_file_input, globals, globals);
     Py_XDECREF(out);

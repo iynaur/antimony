@@ -17,8 +17,10 @@ ScriptEditor::ScriptEditor(Script* script, QWidget* parent)
 {
     //  Propagate script changes back to the node
     auto doc = document();
-    connect(doc, &QTextDocument::contentsChanged,
-            [=](){ script->setText(doc->toPlainText().toStdString()); });
+    if (0){
+        connect(doc, &QTextDocument::contentsChanged,
+                [=](){ script->setText(doc->toPlainText().toStdString()); });
+    }
 
     {   // Use Courier as our default font
         QFont font;
