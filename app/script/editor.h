@@ -27,4 +27,6 @@ public:
      *  Highlights the given line in red
      */
     void highlightError(int lineno);
+private:
+    QString curtext;
 };

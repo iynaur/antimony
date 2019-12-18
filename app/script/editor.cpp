@@ -18,8 +18,13 @@ ScriptEditor::ScriptEditor(Script* script, QWidget* parent)
     //  Propagate script changes back to the node
     auto doc = document();
     if (1){//why skip this cause view not updated immediately?
-        connect(doc, &QTextDocument::contentsChanged,
-                [=](){ script->setText(doc->toPlainText().toStdString()); });
+        connect(this, &QPlainTextEdit::textChanged,
+                [=]()
+        {
+            if (doc->toPlainText() == curtext) return;
+            curtext = doc->toPlainText();
+            script->setText(curtext.toStdString());
+        });
     }
 
     {   // Use Courier as our default font
