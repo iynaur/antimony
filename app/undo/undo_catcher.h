@@ -22,8 +22,10 @@ public:
     UndoCatcher(G* target, P* parent=NULL)
         : T(parent), target(target)
     {
-        T::connect(T::document(), &QTextDocument::undoCommandAdded,
-                   this, &UndoCatcher<T, P, G, U>::onUndoCommandAdded);
+        if(0){
+            T::connect(T::document(), &QTextDocument::undoCommandAdded,
+                       this, &UndoCatcher<T, P, G, U>::onUndoCommandAdded);
+        }
         T::installEventFilter(this);
     }
 
