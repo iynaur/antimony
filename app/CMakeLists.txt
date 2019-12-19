@@ -129,6 +129,8 @@ else()
     set(ANTIMONY_APP antimony)
     add_executable(${ANTIMONY_APP} ${SRC_FILES})
 
+    add_executable(pytest app/pytest.cpp)
+
     # Copy node and fab directory into build directory
     add_custom_command(TARGET ${ANTIMONY_APP} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -156,6 +158,15 @@ target_link_libraries(${ANTIMONY_APP}
     SbGraph
     SbFab)
 
+  target_link_libraries(pytest
+      Qt5::Widgets
+      Qt5::Gui
+      Qt5::OpenGL
+      Qt5::Network
+      Qt5::Concurrent
+      SbGraph
+      SbFab)
+
 ################################################################################
 
 execute_process(COMMAND git log --pretty=format:'%h' -n 1
@@ -180,8 +191,16 @@ target_include_directories(${ANTIMONY_APP} SYSTEM PRIVATE
     ${AUTOGEN_TARGETS_FOLDER}
 )
 
+target_include_directories(pytest SYSTEM PRIVATE
+    ${PYTHON_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
+    ${AUTOGEN_TARGETS_FOLDER}
+)
+
 ################################################################################
 
 set_property(TARGET ${ANTIMONY_APP} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${ANTIMONY_APP} PROPERTY C_STANDARD 99)
+
+set_property(TARGET pytest PROPERTY CXX_STANDARD 11)
 
