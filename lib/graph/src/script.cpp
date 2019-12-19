@@ -1,4 +1,5 @@
 #include <Python.h>
+#include <iostream>
 
 #include "graph/script.h"
 #include "graph/script_node.h"
@@ -58,6 +59,7 @@ void Script::update()
     // Get the output from the StringIO object
     PyObject* s = PyObject_CallMethod(string_out, "getvalue", NULL);
     output = std::string(PyUnicode_AsUTF8(s));
+    std::cerr<<"python output: "<<output<<std::endl;
 
     // Swap stdout back into sys.stdout
     PyObject_SetAttrString(sys_mod, "stdout", stdout_obj);
